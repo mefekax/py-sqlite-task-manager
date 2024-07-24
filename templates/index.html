@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin-bottom: 10px; }
+        .done { text-decoration: line-through; color: #888; }
+    </style>
+</head>
+<body>
+    <h1>Task Manager</h1>
+    <form action="{{ url_for('add_task') }}" method="post">
+        <input type="text" name="task" placeholder="Enter a new task" required>
+        <button type="submit">Add Task</button>
+    </form>
+    <h2>Tasks:</h2>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <a href="{{ url_for('toggle_task', id=task[0]) }}" class="{{ task[2] }}">
+                    {{ task[1] }} ({{ task[2] }})
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
